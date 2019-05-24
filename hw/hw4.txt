@@ -1,0 +1,119 @@
+Edward Prokopik
+CSC 137
+HW 4
+
+
+1.
+
+
+7.
+    0010:
+        0 0010
+        0 0010 00
+        micro code:
+            0001000, equals 8 in decimal
+    1011:
+        0 1011
+        0 1011 00
+        micro code:
+            0101100, equals 44 in decimal
+    1111:
+        0 1111
+        0 1111 00
+        micro code:
+            0111100, equals 60 in decimal
+
+11.
+    a) AC<-AC+1, DR<-DR+1
+        Field    Bit     Symbol
+        --------------------------------
+        F1       011     INCAC
+        F2       110     INCDR
+        F3       000     NOP
+
+    b) PC<-PC+1, DR<-M[AR]
+        Field    Bit     Symbol
+        --------------------------------
+        F1       000     NOP
+        F2       100     READ
+        F3       101     INCPC
+
+    c) DR<-AC, AC<-DR 
+        Field    Bit     Symbol
+        --------------------------------
+        F1       100     DRTAC
+        F2       101     ACTDR
+        F3       000     NOP
+
+12.
+    a)
+        Field    Bit     Register Transfer
+        --------------------------------
+        F1       000     None
+        F2       100     PC<-PC+1
+        F3       101     DR <- M[AR]
+    
+    b)
+        Field    Bit     Register Transfer
+        --------------------------------
+        F1       100     AC <- DR
+        F2       101     DR <- AC
+        F3       000     None
+
+    c)
+        Field    Bit     Register Transfer
+        --------------------------------
+        F1       100     AC <- DR
+        F1       111     M[AR] <- DR
+        F3       110     PC <- AR
+
+15.
+    a)
+        Address      Microprogram
+        -------------------------------
+        60           CLRAC, COM U JMP INDR CTS
+        61           WRITE, READ I CALL FETCH
+        62           ADD, SUB S RET 63
+        63           DRTAC, INCDR Z MAP 60
+
+    b)
+        60:  
+            The program wont increment and complement the AC at the same time.
+        61:
+            The program cant read and write at the same time.
+        62:
+            The program cant add and subract at the same time.
+        63:
+            The z symbol does not matter, neither does the 60.
+
+16.
+    AND 0100:
+        ORG 16
+        AND: NOP I CALL INDRCT
+        READ U JMP NEXT
+        ANDOP: AND U JMP FETCH
+    SUB 0101:
+        ORG 20
+        SUB: NOP I CALL INDRCT
+        READ U JMP NEXT
+        AND U JMP FETCH
+    ADM 0110:
+        ORG 24
+        ADM: NOP I CALL INDRCT
+        READ U JMP NEXT
+        DRTAC, ACTDR U JMP NEXT
+        ADD U JMP EXCHANGE+2
+
+17.
+    ISZ: NOP I CALL INDRCT
+    READ U JMP NEXT
+    INCDR U JMP NEXT
+    DRTAC, ACTDR U JMP NEXT 
+    DRTAC, ACTDR Z JMP ZERO
+    WRITE U JMP FETCH
+    ZERO: WRITE, INCPC U JMP FETCH
+
+18.
+    BSA: NOP I CALL INDRCT
+    PCTDR, ARTPC U JMP NEXT 
+    WRITE, INCPC U JMP FETCH

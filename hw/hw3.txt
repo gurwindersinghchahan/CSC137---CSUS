@@ -1,0 +1,159 @@
+Edward Prokopik
+
+Homework 3
+
+
+#6.1
+
+    Location    Instruction     AC      PC      IR 
+    ------------------------------------------------
+    010         CLA             0000    011     7800
+
+    011         ADD 016         C1A5    012     1016
+
+    012         BUN 014         C1A5    014     4014
+
+    013         HLT             8184    014     7001
+
+    014         AND 017         8184    015     0017
+
+    015         BUN 013         8184    013     4013
+
+    016         C1A5            
+
+    017         9306
+
+
+#6.2
+
+    Location    Instruction     Memory Word     AC
+    -----------------------------------------------
+
+    100         5103            BSA 103         
+
+    101         7200            CHA             FFFE A
+
+    102         7001            HLT             
+
+    103         0000            5101
+
+    104         7800            CLA             0000
+
+    105         7020            INC             0001
+
+    106         C103            BUN 103 
+
+
+
+#6.7
+
+    a)
+        LOP 105
+        HDS 10B
+        PTR 10C
+        NBR 10D
+        CTR 10E
+        SUM 10F
+
+    b)
+        100 210B LDA ADS
+        101 310C STA PTR
+        102 210D LDA NBR
+        103 310E STA CTR
+        104 7800 CLA
+        105 910C LOP, ADD PTR I
+        106 610C ISZ PTR
+        107 610E ISZ CTR
+        108 4105 BUN LOP
+        109 310F STA SUM
+        10A 7001 HLT
+        10B 0150 ADS, HEX 150
+        10C 0000 PTR, HEX 0
+        10D FF9C NBR, DEC -100
+        10E 0000 CTR, HEX 0
+        10F 0000 SJH, HEX 0
+        ORG 150
+        150 004B DEC 150 
+        1B3 0017 DEC 23
+        END
+
+#6.21
+
+    BSA ROU
+    HEX 15 
+    HEX 10 
+    HEX  0 
+    HLT
+    ROU, HEX 0
+    LDA ROU I
+    CMA
+    INC
+    STA ITM
+    ISZ ROU
+    LDA ROU
+    ADD ITM 
+    ISZ ROU
+    STA ROU I 
+    ISZ ROU 
+    BUN ROU I 
+    ITM, HEX 0
+
+
+#5
+
+    ORG 100
+    LDA X 
+    CMA 
+    INC 
+    ADD Y
+
+    SPA
+    BUN LOP
+
+    LDA Y
+
+
+    CMA 
+    INC 
+
+    ADD X 
+    STA Z 
+    BUN FIN 
+LOP   CLA 
+
+AGA   ADD X 
+      ISZ Y
+      BUN AGA 
+      STA SUM 
+FIN   HLT 
+X     DEC 4 
+Y     DEC - 10 
+Z     HEX 0 
+SUM   HEX 0 
+END    
+
+
+LOCATION        INSTUCTION      COMMENT 
+
+100             2117            LDA X 
+101             7200            CMA
+102             7020            INC 
+103             9118            ADD Y
+104             7010            SPA 
+105             4112            BUN LOP 
+106             2118            LDA Y
+107             7200            CMA 
+108             7020            INC 
+109             1117            ADD X 
+110             3119            STA Z 
+111             4116            BUN FIN 
+112             7800            CLA     
+113             1117            ADD X 
+114             4113            BUN AGA 
+115             3120            STA SUM 
+116             7001            HLT 
+117                             X 
+118                             Y 
+119                             Z 
+120                             SUM 
+121             END             END

@@ -1,0 +1,6 @@
+1. @ event
+
+2. while((clk ==0 || clk == x))
+    and later clk == 1)
+
+3. <= parallel transfer you know

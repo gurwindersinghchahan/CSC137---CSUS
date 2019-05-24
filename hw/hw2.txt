@@ -1,0 +1,40 @@
+Edward Prokopik
+CSC 137
+
+5-13
+    SUB:
+        CMA AC
+        INC AC
+
+    XCH:
+        AC M[EA], M[EA]  AC
+
+5-21
+    Derive the control gates associated with the program counter PC in the basic computer.
+
+    R'T0:
+    R'T1:
+    RT0:
+    RT1:
+    RT2:
+    D4T4:
+    D5T4:
+    D5T5:
+    D6T6:
+    rB4:
+    
+
+
+5-22
+    Derive the control gates for the write input of the memory in the basic computer.
+5-24
+    Derive the Boolean Logic expression for x2.(Table 5-7) 
+    Show that x2 can be generated with one AND gate and one OR gate.
+
+Three More Questions:
+
+1.
+
+2.
+
+3.

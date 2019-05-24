@@ -1,0 +1,151 @@
+Edward Prokopik
+CSC 137
+
+5-1
+    a)
+        Operation Code:     32 - 1 - 18 - 6 = 7 bits
+
+        Register Code Part: 2^6 = 6 bits
+
+        Address Part:       256kB * 1024kB = 2^8 * 2^10 = 2^18
+                            2^18 = 18 bits
+
+    b)
+             31         30  24    23    18    17    0
+        Indirect bit,   Opcode,   Register,   Address
+           (1 bit)     (7 bits)   (6 bits)    (18 bits)  
+
+    c)
+        Word Size = 32 bits, so Data Input   = 32 bits
+        Address   = 18 bits, so Adress Input = 18 bits
+
+5-2
+    Indirect has two memory references, one address is used 
+    to get the address of the operand, and the other is used
+    to get the operands actual value. Is slower than direct.
+
+    Direct has only one memory reference that just has the operand at that address.
+    Faster, but has a more limited address space.
+
+
+5-3
+    a)
+        BUS(7)
+        READ   - read memory
+        LD(IR) - load to IR
+        Answer: IR <- M[AR]
+
+    b)
+        BUS(6) - connect TR
+        LD(PC) - load to PC
+        Answer: PC <- TR
+
+    c)
+        BUS(4) - connect AC
+        WRITE  - write to memory
+        LD(DR) - load to DR
+        Answer: M[AR] <- AC, DR <- AC
+
+    d)
+        BUS(0) 
+        ADD    - add DR and AC
+        Answer: AC <- AC + DR
+
+5-4 
+        S2  S1  S0 val  LD()  Mem    Add
+    a)   0   1   0   2   AR   
+    b)   1   1   1   7   IR   READ
+    c)   1   1   0   6        WRITE
+    d)   1   0   0   4  AC,DR        DR
+
+5-5
+    a)  2 clock pulses
+        AR <- PC     send address to AR
+        IR <- M[AR]  move from memory
+
+    b)  2 clock pulses
+        DR <- TR       operand to DR
+        AC <- AC + DR  add the DR to the AC
+
+    c)  4 clock pulses
+        TR <- AC             move AC to TR
+        AC <- AC + DR        add DR to the AC
+        DR <- TR             put saved AC in DR
+        AC <- DR - DR <- AC  switch AC and DR
+       
+5-6
+    a)  
+        Hex Instruction: 1, 0, 2, 4
+        AC <- M[AR] + AC 
+        Address: 24
+        Adding at the address 24
+    b)
+        Hex Instruction: B, 1, 2, 4 
+        AR <- M[AR]
+        M[AR] <- AC
+        Address: 124
+        Add to memory
+    c)
+        Hex Instruction: 7, 0, 2, 0
+        AC <- AC + 1
+        Add one to the AC
+
+5-7
+
+    The instructions needed are CLE (7400) and CME (7100)
+    This clears E and complements it.
+
+5-9
+
+           AC     E     PC     AR     IR
+           --------------------------------
+     CLA:  0000   1    021    800    7800
+     CLE:  A937   0    022    400    7400
+     CMA:  56C8   1    022    200    7200
+     CME:  A937   0    022    100    7100
+     CIR:  D49B   1    022    080    7080
+     CIL:  562F   1    022    040    7040
+     INC:  A938   1    022    020    7020
+     SPA:  A937   1    022    010    7010
+     SNA:  A937   1    022    008    7008
+     SZA:  A937   1    022    004    7004
+     SZE:  A937   1    022    002    7002
+     HLT:  A937   1    022    001    7001
+
+
+5-10
+
+           PC      AR      DR      AC      IR
+           -------------------------------------
+     AND:  022     083     B8F2    A832    0083 
+     ADD:  022     083     B8F2    6229    1083 
+     LDA:  022     083     B8F2    B8F2    2083 
+     STA:  022     083     NULL    A937    3083 
+     BUN:  083     083     NULL    A937    4083 
+     BSA:  084     083     NULL    A937    5083 
+     ISZ:  022     083     B8F3    A937    6083 
+
+
+
+5-11
+
+          PC      AR      DR      IR      SC
+        --------------------------------------
+    T0:   7FF     7FF                     1
+    T1:   800     7FF             EA9F    2
+    T2:   800     A9F             EA9F    3
+    T3:   800     C35             EA9F    4
+    T4:   800     C35     FFFF    EA9F    5
+    T5:   800     C35     0000    EA9F    6
+    T6:   801     C35     0000    EA9F    0
+
+
+5-12
+
+    a)  932E (indirect ADD) will be executed next.
+
+    b)  32E -> 09AC -> 8B9F = DR
+         DR + AC
+         8B9F + 7EC3
+         1000 1011 1001 1111 + 0111 1110 1100 0011
+         = 0000 1010 0110 0010 = 0A62
